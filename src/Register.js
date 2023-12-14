@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import back from "../src/assets/back.png";
 import "./App.css"; // Correct path to your image
 import { useFormik } from "formik";
+import { signUpSchema } from "./schemas";
 
 const initialValues = {
   name: "",
@@ -13,11 +14,13 @@ const initialValues = {
 
 export const Register = () => {
   const { values, errors, handleBlur, handleChange, handleSubmit } = useFormik({
-    initialValues: initialValues,
+    initialValues: initialValues, //initial value get garcham
+    validationSchema: signUpSchema, // validation huncha
     onSubmit: (values) => {
-      console.log("🚀 ~ file: Register.js:18 ~ Register ~ values:", values);
-    },
+      console.log("🚀 ~ file: Register.js:20 ~ Register ~ values:", values);
+    }, //onSubmit maa hami lai data milcha
   });
+  console.log("🚀 ~ file: Register.js:23 ~ Register ~ errors:", errors);
 
   return (
     <div
@@ -48,6 +51,7 @@ export const Register = () => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
+                {<p className="form-error">{errors.name}</p>}
               </div>
               <div className="mb-3">
                 <label htmlFor="email" className="form-label">
@@ -64,7 +68,9 @@ export const Register = () => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
+                {<p className="form-error">{errors.email}</p>}
               </div>
+              {/* ===================password============================ */}
               <div className="mb-3">
                 <label htmlFor="password" className="form-label">
                   Password
@@ -80,7 +86,9 @@ export const Register = () => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
+                {<p className="form-error">{errors.password}</p>}
               </div>
+              {/* =======================Confirm password===================== */}
               <div className="mb-3">
                 <label htmlFor="confirmPassword" className="form-label">
                   Confirm Password
@@ -96,6 +104,7 @@ export const Register = () => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
+                {<p className="form-error">{errors.confirmPassword}</p>}
               </div>
               <button type="submit" className="btn btn-primary">
                 Register
